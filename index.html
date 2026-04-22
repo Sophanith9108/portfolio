@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kong Sophanit — Mobile Engineer</title>
+<meta name="description" content="Portfolio of Kong Sophanit — Senior Digital Banking Officer and Mobile Engineer based in Phnom Penh, Cambodia. Android, Flutter, Kotlin, Dart." />
+<style>
+  :root {
+    --bg: #0b0d10;
+    --bg-soft: #11141a;
+    --fg: #e7e9ee;
+    --muted: #8b93a1;
+    --accent: #7cf6c8;
+    --accent-2: #a78bfa;
+    --border: #1f242d;
+    --radius: 14px;
+    --max: 1100px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(10px);
+    background: rgba(11, 13, 16, 0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 16px; padding-bottom: 16px;
+  }
+  nav .brand { font-weight: 700; letter-spacing: -0.01em; }
+  nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+  nav ul a { color: var(--muted); font-size: 14px; }
+  nav ul a:hover { color: var(--fg); text-decoration: none; }
+
+  .hero { padding: 96px 0 72px; }
+  .hero .tag {
+    display: inline-block;
+    font-size: 13px; color: var(--accent);
+    border: 1px solid var(--border); background: var(--bg-soft);
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05; margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p { font-size: 18px; color: var(--muted); max-width: 680px; margin: 0 0 32px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 20px; border-radius: var(--radius);
+    font-weight: 600; font-size: 14px; border: 1px solid var(--border);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #0b0d10; border-color: var(--accent); }
+  .btn-ghost { color: var(--fg); background: transparent; }
+  .btn-ghost:hover { background: var(--bg-soft); }
+
+  section { padding: 72px 0; border-top: 1px solid var(--border); }
+  section h2 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  section .lead { color: var(--muted); margin: 0 0 40px; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-grid p { color: var(--muted); }
+
+  /* Timeline */
+  .timeline { position: relative; margin-left: 8px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+    width: 2px; background: var(--border);
+  }
+  .job { position: relative; padding-left: 36px; padding-bottom: 28px; }
+  .job::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .job-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .job h3 { margin: 0; font-size: 17px; }
+  .job .company { color: var(--accent); font-weight: 500; }
+  .job .period { color: var(--muted); font-size: 13px; }
+  .job .location { color: var(--muted); font-size: 13px; margin: 2px 0 8px; }
+  .job p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { margin: 0 0 8px; font-size: 18px; }
+  .card p { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+  .card .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 12px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 3px 10px;
+  }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .skill-group h4 { margin: 0 0 12px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .skill-group .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-group .chip { font-size: 13px; padding: 6px 14px; color: var(--fg); }
+
+  .edu-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-item h3 { margin: 0 0 4px; font-size: 16px; }
+  .edu-item .period { color: var(--muted); font-size: 13px; }
+  .edu-item p { color: var(--muted); margin: 4px 0 0; font-size: 14px; }
+
+  .contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
+  .contact-links a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border: 1px solid var(--border);
+    border-radius: var(--radius); background: var(--bg-soft);
+    color: var(--fg);
+  }
+  .contact-links a:hover { border-color: var(--accent); text-decoration: none; }
+
+  footer {
+    padding: 32px 0; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 14px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="brand">Kong Sophanit</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="tag">Phnom Penh, Cambodia</span>
+    <h1>Kong Sophanit — <span class="grad">Mobile Engineer</span> building digital banking experiences.</h1>
+    <p>Senior Digital Banking Officer at Heng Feng (Cambodia) Bank Plc. with 8+ years building Android and Flutter apps in Kotlin, Java, and Dart. I care about user-friendly, responsive, and secure mobile apps that meet real business needs.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#experience">View experience</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <h2>About</h2>
+    <p class="lead">Mobile engineer with a focus on banking and fintech.</p>
+    <div class="about-grid">
+      <p>As a Mobile Engineer, I've been developing and maintaining Android and Flutter applications for clients across fintech, agriculture, and ride-hailing. I use Kotlin, Java, Dart, and Firebase to create apps that are user-friendly, responsive, and secure — and that meet both business requirements and user expectations.</p>
+      <p>I'm proficient with Android Studio, the Flutter SDK, Jetpack Compose, Material Design, and Google APIs. I enjoy working in collaborative environments where I can learn from other developers and share best practices, and I'm always exploring new technologies and trends in mobile development.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <h2>Experience</h2>
+    <p class="lead">8+ years across digital banking and mobile app development.</p>
+    <div class="timeline">
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Senior Digital Banking Officer · <span class="company">Heng Feng (Cambodia) Bank Plc.</span></h3>
+          <span class="period">Dec 2023 — Present</span>
+        </div>
+        <div class="location">Phnom Penh, Cambodia</div>
+        <p>Leading digital banking initiatives and mobile product delivery.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Senior Mobile Software Development Officer · <span class="company">Canadia Bank</span></h3>
+          <span class="period">Feb 2022 — Nov 2023</span>
+        </div>
+        <div class="location">Canadia Tower, Phnom Penh</div>
+        <p>Built and maintained mobile banking applications.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Flutter Developer · <span class="company">BRONX Technology Co., Ltd.</span></h3>
+          <span class="period">May 2020 — Nov 2021</span>
+        </div>
+        <div class="location">Boeung Keng Kang I, Phnom Penh</div>
+        <p>Developed native Flutter applications for multiple client projects.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Senior Android Engineer · <span class="company">BRONX Technology Co., Ltd.</span></h3>
+          <span class="period">Mar 2019 — Jun 2021</span>
+        </div>
+        <div class="location">Boeung Keng Kang I, Phnom Penh</div>
+        <p>Developed Android mobile apps for a range of business clients.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Flutter Developer · <span class="company">AGRIBEE (Cambodia) Plc.</span></h3>
+          <span class="period">Jun 2021 — Oct 2021</span>
+        </div>
+        <div class="location">Phnom Penh, Cambodia</div>
+        <p>Implemented and maintained features for BeeApp.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Android Developer · <span class="company">HARi</span></h3>
+          <span class="period">Jan 2018 — Mar 2019</span>
+        </div>
+        <div class="location">Phnom Penh, Cambodia</div>
+        <p>Built and maintained Android applications.</p>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <h3>Android Developer · <span class="company">GAEASYS</span></h3>
+          <span class="period">Mar 2017 — Mar 2018</span>
+        </div>
+        <div class="location">Phnom Penh, Cambodia</div>
+        <p>Built an Android taxi app for drivers and customers from scratch.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2>Skills & Tools</h2>
+    <p class="lead">Languages, frameworks, and tools I work with.</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="chips">
+          <span class="chip">Kotlin</span>
+          <span class="chip">Java</span>
+          <span class="chip">Dart</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Frameworks & SDKs</h4>
+        <div class="chips">
+          <span class="chip">Flutter SDK</span>
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">Material Design</span>
+          <span class="chip">Android SDK</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Platforms & Services</h4>
+        <div class="chips">
+          <span class="chip">Firebase</span>
+          <span class="chip">Google APIs</span>
+          <span class="chip">Android Studio</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Top Skills</h4>
+        <div class="chips">
+          <span class="chip">Budget Management</span>
+          <span class="chip">Program Management</span>
+          <span class="chip">Version Control Tools</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <h2>Education</h2>
+    <p class="lead">Formal education and professional training.</p>
+    <div class="edu-item">
+      <h3>University of Cambodia</h3>
+      <div class="period">2012 — 2017</div>
+      <p>Bachelor's degree, Information Technology</p>
+    </div>
+    <div class="edu-item">
+      <h3>HRD Center</h3>
+      <div class="period">2016 — 2017</div>
+      <p>Basic and Advanced Courses — Java, Web, Spring, Android</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Let's connect</h2>
+    <p class="lead">Open to collaborations, projects, and good conversations.</p>
+    <div class="contact-links">
+      <a href="mailto:sophanith.kong221@gmail.com">sophanith.kong221@gmail.com</a>
+      <a href="tel:+85578462628">+855 97 846 2628</a>
+      <a href="https://www.linkedin.com/in/sophanit9108" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> Kong Sophanit · Phnom Penh, Cambodia
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
