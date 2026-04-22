@@ -7,15 +7,19 @@
 <meta name="description" content="Portfolio of Kong Sophanit — Senior Digital Banking Officer and Mobile Engineer based in Phnom Penh, Cambodia. Android, Flutter, Kotlin, Dart." />
 <style>
   :root {
-    --bg: #000000;
-    --bg-alt: #0b0b0d;
+    --bg: #05080a;
+    --bg-alt: rgba(255, 255, 255, 0.03);
     --fg: #f5f5f7;
-    --muted: #86868b;
-    --forest: #4ea572;
-    --forest-dark: #6cc08c;
-    --forest-soft: rgba(78, 165, 114, 0.14);
-    --border: #2a2a2d;
-    --radius: 12px;
+    --muted: #a1a1a6;
+    --forest: #5fc48a;
+    --forest-dark: #7edaa4;
+    --forest-soft: rgba(95, 196, 138, 0.14);
+    --glass: rgba(255, 255, 255, 0.06);
+    --glass-strong: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.18);
+    --border: rgba(255, 255, 255, 0.08);
+    --radius: 16px;
     --max: 980px;
   }
   * { box-sizing: border-box; }
@@ -27,18 +31,57 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Liquid glass background — animated color orbs */
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    width: 60vmax; height: 60vmax;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+  }
+  body::before {
+    background: radial-gradient(circle, #2d7a52 0%, transparent 70%);
+    top: -20vmax; left: -15vmax;
+    animation: float1 22s ease-in-out infinite;
+  }
+  body::after {
+    background: radial-gradient(circle, #1e5c8a 0%, transparent 70%);
+    bottom: -25vmax; right: -20vmax;
+    animation: float2 28s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10vmax, 8vmax) scale(1.1); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-12vmax, -6vmax) scale(1.15); }
   }
   a { color: var(--forest); text-decoration: none; }
   a:hover { color: var(--forest-dark); text-decoration: underline; }
   .container { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
 
-  /* Nav — Apple-style thin translucent bar */
+  /* Nav — liquid glass bar */
   nav {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--border);
+    position: sticky; top: 12px; z-index: 10;
+    margin: 12px auto 0;
+    max-width: calc(var(--max) + 24px);
+    background: var(--glass);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 980px;
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 10px 40px -10px rgba(0, 0, 0, 0.6);
   }
   nav .container {
     display: flex; justify-content: space-between; align-items: center;
@@ -46,14 +89,28 @@
   }
   nav .brand { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; color: var(--fg); }
   nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
-  nav ul a { color: var(--fg); font-size: 13px; opacity: 0.85; }
+  nav ul a {
+    color: var(--fg); font-size: 13px; opacity: 0.75;
+    position: relative; padding: 4px 0;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
   nav ul a:hover { opacity: 1; color: var(--forest); text-decoration: none; }
+  nav ul a.active {
+    color: var(--forest); opacity: 1; font-weight: 500;
+  }
+  nav ul a.active::after {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 2px; background: var(--forest);
+    border-radius: 2px;
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
   /* Hero */
   .hero {
     padding: 120px 0 100px;
     text-align: center;
-    background: var(--bg-alt);
+    background: transparent;
   }
   .hero .tag {
     display: inline-block;
@@ -79,21 +136,47 @@
   }
   .cta { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
   .btn {
-    display: inline-block; padding: 12px 22px;
+    display: inline-block; padding: 12px 24px;
     border-radius: 980px;
-    font-weight: 400; font-size: 15px;
-    border: 1px solid transparent;
-    transition: background 0.2s ease, color 0.2s ease;
+    font-weight: 500; font-size: 15px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.25s ease;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
   }
-  .btn:hover { text-decoration: none; }
-  .btn-primary { background: var(--forest); color: #000; }
-  .btn-primary:hover { background: var(--forest-dark); color: #000; }
-  .btn-ghost { color: var(--forest); background: transparent; }
-  .btn-ghost:hover { color: var(--forest-dark); text-decoration: underline; }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(180deg, rgba(95, 196, 138, 0.9), rgba(69, 160, 110, 0.9));
+    color: #04100a;
+    border-color: rgba(95, 196, 138, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 8px 24px -6px rgba(95, 196, 138, 0.5);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, rgba(126, 218, 164, 0.95), rgba(95, 196, 138, 0.95));
+    color: #04100a;
+  }
+  .btn-ghost {
+    color: var(--fg);
+    background: var(--glass);
+  }
+  .btn-ghost:hover { background: var(--glass-strong); color: var(--forest-dark); text-decoration: none; }
 
   /* Sections */
-  section { padding: 100px 0; }
-  section:nth-of-type(even) { background: var(--bg-alt); }
+  section { padding: 100px 0; position: relative; }
+  section + section::before {
+    content: "";
+    position: absolute; top: 0; left: 50%;
+    width: min(760px, 80%); height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+  }
+  .divider {
+    height: 1px; background: var(--border);
+    max-width: 760px; margin: 0 auto;
+  }
   section h2 {
     font-size: clamp(32px, 4vw, 48px);
     margin: 0 0 12px;
@@ -136,22 +219,30 @@
   .job .location { color: var(--muted); font-size: 14px; margin: 4px 0 8px; }
   .job p { color: var(--muted); font-size: 15px; margin: 0; }
 
-  /* Project cards (unused now but kept flat) */
+  /* Project cards (unused now but kept glassy) */
   .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .card {
-    background: var(--bg-alt); border: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius); padding: 28px;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
   }
   .card h3 { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
   .card p { color: var(--muted); font-size: 15px; margin: 0 0 16px; }
   .card .stack { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .chip {
-    font-size: 13px; color: var(--forest);
-    background: var(--forest-soft);
+    font-size: 13px; color: var(--forest-dark);
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
     border-radius: 980px;
     padding: 6px 14px;
     font-weight: 500;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
   }
 
   /* Skills */
@@ -169,6 +260,30 @@
   .edu-item .period { color: var(--muted); font-size: 14px; }
   .edu-item p { color: var(--muted); margin: 6px 0 0; font-size: 15px; }
 
+  /* Hobbies */
+  .hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; max-width: 880px; margin: 0 auto;
+  }
+  .hobby {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .hobby:hover { transform: translateY(-2px); border-color: rgba(95, 196, 138, 0.35); }
+  .hobby .icon {
+    font-size: 28px; line-height: 1;
+    display: block; margin-bottom: 12px;
+  }
+  .hobby h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  .hobby p { margin: 0; color: var(--muted); font-size: 14px; }
+
   /* Contact */
   .contact-links {
     display: flex; flex-wrap: wrap; gap: 12px;
@@ -176,19 +291,33 @@
   }
   .contact-links a {
     display: inline-flex; align-items: center;
-    padding: 12px 22px;
+    padding: 12px 24px;
     border-radius: 980px;
-    background: var(--forest);
-    color: #000;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    color: var(--fg);
     font-size: 15px;
     font-weight: 500;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    transition: all 0.25s ease;
   }
-  .contact-links a:hover { background: var(--forest-dark); color: #000; text-decoration: none; }
+  .contact-links a:hover {
+    background: var(--glass-strong);
+    border-color: rgba(95, 196, 138, 0.4);
+    color: var(--forest-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
 
   footer {
-    padding: 28px 0; border-top: 1px solid var(--border);
+    padding: 28px 0;
     color: var(--muted); font-size: 13px; text-align: center;
-    background: var(--bg-alt);
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   /* Tablet */
@@ -264,7 +393,9 @@
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#principles">Principles</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -397,12 +528,91 @@
         </div>
       </div>
       <div class="skill-group">
+        <h4>Dev Tools</h4>
+        <div class="chips">
+          <span class="chip">VS Code</span>
+          <span class="chip">Cursor</span>
+          <span class="chip">Xcode</span>
+          <span class="chip">Git</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">GitLab</span>
+          <span class="chip">Postman</span>
+          <span class="chip">Figma</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>AI & LLMs</h4>
+        <div class="chips">
+          <span class="chip">Claude</span>
+          <span class="chip">Claude Code</span>
+          <span class="chip">ChatGPT</span>
+          <span class="chip">Gemini</span>
+          <span class="chip">GitHub Copilot</span>
+          <span class="chip">Ollama</span>
+          <span class="chip">LM Studio</span>
+          <span class="chip">Local LLMs</span>
+          <span class="chip">Anthropic API</span>
+          <span class="chip">OpenAI API</span>
+        </div>
+      </div>
+      <div class="skill-group">
         <h4>Top Skills</h4>
         <div class="chips">
           <span class="chip">Budget Management</span>
           <span class="chip">Program Management</span>
           <span class="chip">Version Control Tools</span>
+          <span class="chip">Mobile App Architecture</span>
+          <span class="chip">Digital Banking</span>
+          <span class="chip">Team Leadership</span>
+          <span class="chip">Code Review</span>
+          <span class="chip">Agile / Scrum</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">CI/CD</span>
+          <span class="chip">Cross-functional Collaboration</span>
+          <span class="chip">Performance Optimization</span>
+          <span class="chip">App Security</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Mentoring</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="container">
+    <h2>Leadership & Discipline</h2>
+    <p class="lead">The principles I bring to every team and every project.</p>
+    <div class="hobby-grid">
+      <div class="hobby">
+        <span class="icon">🧭</span>
+        <h3>Lead by Example</h3>
+        <p>Set the bar with the work itself — clean code, clear reviews, and follow-through people can rely on.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🤝</span>
+        <h3>Empower the Team</h3>
+        <p>Mentor junior engineers, share knowledge openly, and create space for others to grow and own their work.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🎯</span>
+        <h3>Focus & Ownership</h3>
+        <p>Commit to outcomes, not excuses. Take responsibility end-to-end from plan to production.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">⏱️</span>
+        <h3>Consistency</h3>
+        <p>Small, steady progress every day beats sporadic bursts. Discipline turns goals into shipped products.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">📈</span>
+        <h3>Continuous Learning</h3>
+        <p>The mobile and AI landscape shifts fast — I keep learning, experimenting, and applying what works.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🛡️</span>
+        <h3>Integrity</h3>
+        <p>Honest communication, especially when things go wrong. Trust is built in the hard conversations.</p>
       </div>
     </div>
   </div>
@@ -425,6 +635,60 @@
   </div>
 </section>
 
+<section id="hobbies">
+  <div class="container">
+    <h2>Hobbies</h2>
+    <p class="lead">A few things I enjoy outside of work.</p>
+    <div class="hobby-grid">
+      <div class="hobby">
+        <span class="icon">📱</span>
+        <h3>Side Projects</h3>
+        <p>Tinkering with new mobile ideas and learning frameworks by building small apps.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">📚</span>
+        <h3>Reading Tech</h3>
+        <p>Keeping up with mobile development trends, design patterns, and engineering blogs.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">☕</span>
+        <h3>Coffee</h3>
+        <p>Exploring cafés around Phnom Penh — a good espresso fuels the best code.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🎮</span>
+        <h3>Gaming</h3>
+        <p>Unwinding with mobile and strategy games — also great UX inspiration.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">✈️</span>
+        <h3>Travel</h3>
+        <p>Discovering new places, cultures, and food whenever the chance comes up.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🎵</span>
+        <h3>Music</h3>
+        <p>Good playlists make long coding sessions fly by.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🏋️</span>
+        <h3>Gym</h3>
+        <p>Lifting and training — keeping the body sharp balances a day at the screen.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🥾</span>
+        <h3>Hiking</h3>
+        <p>Trails, fresh air, and long walks — the best way to reset after intense sprints.</p>
+      </div>
+      <div class="hobby">
+        <span class="icon">🏕️</span>
+        <h3>Camping</h3>
+        <p>Nights under the stars and good conversations around a campfire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="container">
     <h2>Let's connect</h2>
@@ -433,6 +697,7 @@
       <a href="mailto:sophanith.kong221@gmail.com">sophanith.kong221@gmail.com</a>
       <a href="tel:+855899267375">089 26 7375</a>
       <a href="tel:+855122391098">012 23 9108</a>
+      <a href="https://t.me/sophanit9108" target="_blank" rel="noopener">Telegram</a>
       <a href="https://www.linkedin.com/in/sophanit9108" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -446,6 +711,48 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scrollspy — highlight nav link for the section in view
+  const navLinks = document.querySelectorAll('nav ul a[href^="#"]');
+  const sections = Array.from(navLinks)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  };
+
+  const updateActive = () => {
+    const scrollY = window.scrollY;
+    const viewportH = window.innerHeight;
+    const docH = document.documentElement.scrollHeight;
+    const triggerY = scrollY + viewportH * 0.3;
+
+    // If we've reached the bottom, force the last section active
+    if (scrollY + viewportH >= docH - 2) {
+      setActive(sections[sections.length - 1].id);
+      return;
+    }
+
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= triggerY) current = s;
+      else break;
+    }
+    setActive(current.id);
+  };
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateActive(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
 </script>
 
 </body>
