@@ -10,14 +10,14 @@
     --bg: #05080a;
     --bg-alt: rgba(255, 255, 255, 0.03);
     --fg: #f5f5f7;
-    --muted: #a1a1a6;
+    --muted: #b0b0b6;
     --forest: #5fc48a;
     --forest-dark: #7edaa4;
     --forest-soft: rgba(95, 196, 138, 0.14);
-    --glass: rgba(255, 255, 255, 0.06);
-    --glass-strong: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-highlight: rgba(255, 255, 255, 0.18);
+    --glass: rgba(20, 26, 30, 0.55);
+    --glass-strong: rgba(30, 38, 44, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-highlight: rgba(255, 255, 255, 0.22);
     --border: rgba(255, 255, 255, 0.08);
     --radius: 16px;
     --max: 980px;
@@ -39,22 +39,22 @@
   body::before, body::after {
     content: "";
     position: fixed;
-    width: 60vmax; height: 60vmax;
+    width: 55vmax; height: 55vmax;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.55;
+    filter: blur(120px);
+    opacity: 0.32;
     z-index: -1;
     pointer-events: none;
     will-change: transform;
   }
   body::before {
-    background: radial-gradient(circle, #2d7a52 0%, transparent 70%);
-    top: -20vmax; left: -15vmax;
+    background: radial-gradient(circle, #235f3f 0%, transparent 70%);
+    top: -22vmax; left: -18vmax;
     animation: float1 22s ease-in-out infinite;
   }
   body::after {
-    background: radial-gradient(circle, #1e5c8a 0%, transparent 70%);
-    bottom: -25vmax; right: -20vmax;
+    background: radial-gradient(circle, #16486e 0%, transparent 70%);
+    bottom: -28vmax; right: -22vmax;
     animation: float2 28s ease-in-out infinite;
   }
   @keyframes float1 {
@@ -71,7 +71,7 @@
 
   /* Nav — liquid glass bar */
   nav {
-    position: sticky; top: 12px; z-index: 10;
+    position: sticky; top: 12px; z-index: 20;
     margin: 12px auto 0;
     max-width: calc(var(--max) + 24px);
     background: var(--glass);
@@ -82,13 +82,15 @@
     box-shadow:
       inset 0 1px 0 var(--glass-highlight),
       0 10px 40px -10px rgba(0, 0, 0, 0.6);
+    transition: border-radius 0.3s ease;
   }
   nav .container {
     display: flex; justify-content: space-between; align-items: center;
     padding-top: 12px; padding-bottom: 12px;
+    gap: 16px;
   }
-  nav .brand { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; color: var(--fg); }
-  nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  nav .brand { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; color: var(--fg); white-space: nowrap; }
+  nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
   nav ul a {
     color: var(--fg); font-size: 13px; opacity: 0.75;
     position: relative; padding: 4px 0;
@@ -104,7 +106,36 @@
     height: 2px; background: var(--forest);
     border-radius: 2px;
   }
-  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+  /* Hamburger button — hidden on desktop */
+  .nav-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    background: transparent; border: none;
+    cursor: pointer; padding: 0;
+    align-items: center; justify-content: center;
+    color: var(--fg);
+  }
+  .nav-toggle span {
+    position: relative;
+    display: block; width: 20px; height: 2px;
+    background: currentColor; border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    content: ""; position: absolute; left: 0;
+    width: 100%; height: 2px;
+    background: currentColor; border-radius: 2px;
+    transition: transform 0.25s ease;
+  }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+  nav.open .nav-toggle span { background: transparent; }
+  nav.open .nav-toggle span::before { transform: translateY(6px) rotate(45deg); }
+  nav.open .nav-toggle span::after { transform: translateY(-6px) rotate(-45deg); }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
   /* Hero */
   .hero {
@@ -234,11 +265,11 @@
   .card .stack { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .chip {
-    font-size: 13px; color: var(--forest-dark);
-    background: var(--glass);
+    font-size: 13px; color: #b8ecd0;
+    background: rgba(30, 40, 36, 0.6);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(95, 196, 138, 0.25);
     border-radius: 980px;
     padding: 6px 14px;
     font-weight: 500;
@@ -329,24 +360,49 @@
     nav ul { gap: 18px; }
   }
 
-  /* Mobile */
+  /* Mobile — hamburger */
+  @media (max-width: 780px) {
+    nav { margin: 8px 12px 0; top: 8px; border-radius: 22px; }
+    nav .container { padding: 10px 8px 10px 20px; }
+    .nav-toggle { display: inline-flex; }
+    nav ul {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0; right: 0;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px;
+      background: rgba(12, 16, 20, 0.92);
+      backdrop-filter: saturate(180%) blur(28px);
+      -webkit-backdrop-filter: saturate(180%) blur(28px);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      box-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        0 14px 40px -10px rgba(0, 0, 0, 0.7);
+    }
+    nav.open ul { display: flex; }
+    nav ul li { width: 100%; }
+    nav ul a {
+      display: block; width: 100%;
+      padding: 14px 16px; font-size: 16px;
+      color: var(--fg); opacity: 1; font-weight: 500;
+      border-radius: 12px;
+    }
+    nav ul a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--forest-dark);
+    }
+    nav ul a.active {
+      background: rgba(95, 196, 138, 0.18);
+      color: var(--forest-dark);
+    }
+    nav ul a.active::after { display: none; }
+  }
+
   @media (max-width: 640px) {
     .container { padding: 0 18px; }
-
-    /* Nav — brand on top, links wrap below */
-    nav .container {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-      padding-top: 10px; padding-bottom: 10px;
-    }
-    nav ul {
-      width: 100%;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-    nav ul a { font-size: 13px; }
 
     .hero { padding: 64px 0 56px; }
     .hero h1 { font-size: clamp(30px, 8vw, 42px); }
@@ -386,10 +442,13 @@
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <div class="container">
     <div class="brand">Kong Sophanit</div>
-    <ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span>
+    </button>
+    <ul id="nav-menu">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -711,6 +770,20 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const nav = document.getElementById('nav');
+  const toggle = nav.querySelector('.nav-toggle');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('ul a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 
   // Scrollspy — highlight nav link for the section in view
   const navLinks = document.querySelectorAll('nav ul a[href^="#"]');
