@@ -190,6 +190,69 @@
     color: var(--muted); font-size: 13px; text-align: center;
     background: var(--bg-alt);
   }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .container { padding: 0 20px; }
+    .hero { padding: 88px 0 72px; }
+    section { padding: 72px 0; }
+    section .lead { margin-bottom: 40px; font-size: 17px; }
+    nav ul { gap: 18px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .container { padding: 0 18px; }
+
+    /* Nav — brand on top, links wrap below */
+    nav .container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding-top: 10px; padding-bottom: 10px;
+    }
+    nav ul {
+      width: 100%;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    nav ul a { font-size: 13px; }
+
+    .hero { padding: 64px 0 56px; }
+    .hero h1 { font-size: clamp(30px, 8vw, 42px); }
+    .hero p { font-size: 17px; }
+    .cta { flex-direction: column; align-items: stretch; width: 100%; }
+    .cta .btn { text-align: center; }
+
+    section { padding: 56px 0; }
+    section h2 { font-size: clamp(26px, 7vw, 34px); }
+    section .lead { font-size: 16px; margin-bottom: 32px; }
+
+    .about-grid { gap: 20px; }
+    .about-grid p { font-size: 16px; }
+
+    .timeline { margin-left: 4px; }
+    .job { padding-left: 28px; padding-bottom: 28px; }
+    .job-head { flex-direction: column; gap: 2px; }
+    .job h3 { font-size: 16px; }
+    .job .period { font-size: 13px; }
+
+    .skills-grid { gap: 28px; }
+    .edu-item { padding: 20px 0; }
+    .edu-item h3 { font-size: 17px; }
+
+    .contact-links { flex-direction: column; align-items: stretch; }
+    .contact-links a { justify-content: center; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 16px; }
+    nav ul { gap: 10px; }
+    nav ul a { font-size: 12px; }
+  }
 </style>
 </head>
 <body>
