@@ -5,54 +5,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kong Sophanit — Mobile Engineer</title>
 <meta name="description" content="Portfolio of Kong Sophanit — Senior Digital Banking Officer and Mobile Engineer based in Phnom Penh, Cambodia. Android, Flutter, Kotlin, Dart." />
+<script>
+  // Apply theme before paint to avoid flash-of-wrong-theme
+  (function () {
+    try {
+      var t = localStorage.getItem("portfolio.theme");
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.dataset.theme = t;
+    } catch (e) { document.documentElement.dataset.theme = "dark"; }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+<script src="i18n.js" defer></script>
 </head>
 <body>
 
 <nav id="nav">
   <div class="container">
     <div class="brand">Kong Sophanit</div>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
-      <span></span>
-    </button>
     <ul id="nav-menu">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#principles">Principles</a></li>
-      <li><a href="#goals">Goals</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#hobbies">Hobbies</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
+      <li><a href="#goals" data-i18n="nav.goals">Goals</a></li>
+      <li><a href="#achievements" data-i18n="nav.achievements">Achievements</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#hobbies" data-i18n="nav.hobbies">Hobbies</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun"><i data-lucide="sun"></i></span>
+        <span class="icon-moon"><i data-lucide="moon"></i></span>
+      </button>
+      <div class="lang-switch">
+        <button class="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+          <i data-lucide="globe"></i>
+          <span class="lang-current">EN</span>
+          <i data-lucide="chevron-down" class="chev"></i>
+        </button>
+        <ul class="lang-menu" role="menu">
+          <li><button data-lang="en" role="menuitem">English</button></li>
+          <li><button data-lang="km" role="menuitem">ខ្មែរ</button></li>
+          <li><button data-lang="zh" role="menuitem">中文</button></li>
+          <li><button data-lang="ja" role="menuitem">日本語</button></li>
+        </ul>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="container">
-    <span class="tag">Phnom Penh, Cambodia</span>
-    <h1>Kong Sophanit — <span class="grad">Mobile Engineer</span> building digital banking experiences.</h1>
-    <p>Senior Digital Banking Officer at Heng Feng (Cambodia) Bank Plc. with 8+ years building Android and Flutter apps in Kotlin, Java, and Dart. I care about user-friendly, responsive, and secure mobile apps that meet real business needs.</p>
+    <span class="tag" data-i18n="hero.tag">Phnom Penh, Cambodia</span>
+    <h1><span data-i18n="hero.title.start">Kong Sophanit — </span><span class="grad" data-i18n="hero.title.role">Mobile Engineer</span><span data-i18n="hero.title.end"> building digital banking experiences.</span></h1>
+    <p data-i18n="hero.desc">Senior Digital Banking Officer at Heng Feng (Cambodia) Bank Plc. with 8+ years building Android and Flutter apps in Kotlin, Java, and Dart. I care about user-friendly, responsive, and secure mobile apps that meet real business needs.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="#experience">View experience</a>
-      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      <a class="btn btn-primary" href="#experience" data-i18n="hero.cta.experience">View experience</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="hero.cta.contact">Get in touch</a>
     </div>
   </div>
 </header>
 
 <section id="about">
   <div class="container">
-    <h2>About</h2>
-    <p class="lead">Mobile engineer with a focus on banking and fintech.</p>
+    <h2 data-i18n="about.title">About</h2>
+    <p class="lead" data-i18n="about.lead">Mobile engineer with a focus on banking and fintech.</p>
     <div class="about-wrap">
       <aside class="about-quote">
-        <p>Mobile apps should feel obvious, fast, and trustworthy — especially when money is on the line.</p>
-        <div class="sig">— My engineering ethos</div>
+        <p data-i18n="about.quote">Mobile apps should feel obvious, fast, and trustworthy — especially when money is on the line.</p>
+        <div class="sig" data-i18n="about.sig">— My engineering ethos</div>
       </aside>
       <div class="about-prose">
-        <p>As a Mobile Engineer, I've been developing and maintaining Android and Flutter applications for clients across fintech, agriculture, and ride-hailing. I use Kotlin, Java, Dart, and Firebase to create apps that are user-friendly, responsive, and secure — and that meet both business requirements and user expectations.</p>
-        <p>I'm proficient with Android Studio, the Flutter SDK, Jetpack Compose, Material Design, and Google APIs. I enjoy working in collaborative environments where I can learn from other developers and share best practices, and I'm always exploring new technologies and trends in mobile development.</p>
+        <p data-i18n="about.p1">As a Mobile Engineer, I've been developing and maintaining Android and Flutter applications for clients across fintech, agriculture, and ride-hailing. I use Kotlin, Java, Dart, and Firebase to create apps that are user-friendly, responsive, and secure — and that meet both business requirements and user expectations.</p>
+        <p data-i18n="about.p2">I'm proficient with Android Studio, the Flutter SDK, Jetpack Compose, Material Design, and Google APIs. I enjoy working in collaborative environments where I can learn from other developers and share best practices, and I'm always exploring new technologies and trends in mobile development.</p>
       </div>
     </div>
   </div>
@@ -60,71 +96,71 @@
 
 <section id="experience">
   <div class="container">
-    <h2>Experience</h2>
-    <p class="lead">8+ years across digital banking and mobile app development.</p>
+    <h2 data-i18n="exp.title">Experience</h2>
+    <p class="lead" data-i18n="exp.lead">8+ years across digital banking and mobile app development.</p>
     <div class="timeline">
 
       <div class="job">
         <div class="job-head">
-          <h3>Senior Digital Banking Officer · <span class="company">Heng Feng (Cambodia) Bank Plc.</span></h3>
-          <span class="period">Dec 2023 — Present</span>
+          <h3><span data-i18n="exp.role.0">Senior Digital Banking Officer</span> · <span class="company">Heng Feng (Cambodia) Bank Plc.</span></h3>
+          <span class="period" data-i18n="exp.period.0">Dec 2023 — Present</span>
         </div>
-        <div class="location">Phnom Penh, Cambodia</div>
-        <p>Leading digital banking initiatives and mobile product delivery.</p>
+        <div class="location" data-i18n="exp.loc.0">Phnom Penh, Cambodia</div>
+        <p data-i18n="exp.desc.0">Leading digital banking initiatives and mobile product delivery.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Senior Mobile Software Development Officer · <span class="company">Canadia Bank</span></h3>
-          <span class="period">Feb 2022 — Nov 2023</span>
+          <h3><span data-i18n="exp.role.1">Senior Mobile Software Development Officer</span> · <span class="company">Canadia Bank</span></h3>
+          <span class="period" data-i18n="exp.period.1">Feb 2022 — Nov 2023</span>
         </div>
-        <div class="location">Canadia Tower, Phnom Penh</div>
-        <p>Built and maintained mobile banking applications.</p>
+        <div class="location" data-i18n="exp.loc.1">Canadia Tower, Phnom Penh</div>
+        <p data-i18n="exp.desc.1">Built and maintained mobile banking applications.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Flutter Developer · <span class="company">BRONX Technology Co., Ltd.</span></h3>
-          <span class="period">May 2020 — Nov 2021</span>
+          <h3><span data-i18n="exp.role.2">Flutter Developer</span> · <span class="company">BRONX Technology Co., Ltd.</span></h3>
+          <span class="period" data-i18n="exp.period.2">May 2020 — Nov 2021</span>
         </div>
-        <div class="location">Boeung Keng Kang I, Phnom Penh</div>
-        <p>Developed native Flutter applications for multiple client projects.</p>
+        <div class="location" data-i18n="exp.loc.2">Boeung Keng Kang I, Phnom Penh</div>
+        <p data-i18n="exp.desc.2">Developed native Flutter applications for multiple client projects.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Senior Android Engineer · <span class="company">BRONX Technology Co., Ltd.</span></h3>
-          <span class="period">Mar 2019 — Jun 2021</span>
+          <h3><span data-i18n="exp.role.3">Senior Android Engineer</span> · <span class="company">BRONX Technology Co., Ltd.</span></h3>
+          <span class="period" data-i18n="exp.period.3">Mar 2019 — Jun 2021</span>
         </div>
-        <div class="location">Boeung Keng Kang I, Phnom Penh</div>
-        <p>Developed Android mobile apps for a range of business clients.</p>
+        <div class="location" data-i18n="exp.loc.3">Boeung Keng Kang I, Phnom Penh</div>
+        <p data-i18n="exp.desc.3">Developed Android mobile apps for a range of business clients.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Flutter Developer · <span class="company">AGRIBEE (Cambodia) Plc.</span></h3>
-          <span class="period">Jun 2021 — Oct 2021</span>
+          <h3><span data-i18n="exp.role.4">Flutter Developer</span> · <span class="company">AGRIBEE (Cambodia) Plc.</span></h3>
+          <span class="period" data-i18n="exp.period.4">Jun 2021 — Oct 2021</span>
         </div>
-        <div class="location">Phnom Penh, Cambodia</div>
-        <p>Implemented and maintained features for BeeApp.</p>
+        <div class="location" data-i18n="exp.loc.4">Phnom Penh, Cambodia</div>
+        <p data-i18n="exp.desc.4">Implemented and maintained features for BeeApp.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Android Developer · <span class="company">HARi</span></h3>
-          <span class="period">Jan 2018 — Mar 2019</span>
+          <h3><span data-i18n="exp.role.5">Android Developer</span> · <span class="company">HARi</span></h3>
+          <span class="period" data-i18n="exp.period.5">Jan 2018 — Mar 2019</span>
         </div>
-        <div class="location">Phnom Penh, Cambodia</div>
-        <p>Built and maintained Android applications.</p>
+        <div class="location" data-i18n="exp.loc.5">Phnom Penh, Cambodia</div>
+        <p data-i18n="exp.desc.5">Built and maintained Android applications.</p>
       </div>
 
       <div class="job">
         <div class="job-head">
-          <h3>Android Developer · <span class="company">GAEASYS</span></h3>
-          <span class="period">Mar 2017 — Mar 2018</span>
+          <h3><span data-i18n="exp.role.6">Android Developer</span> · <span class="company">GAEASYS</span></h3>
+          <span class="period" data-i18n="exp.period.6">Mar 2017 — Mar 2018</span>
         </div>
-        <div class="location">Phnom Penh, Cambodia</div>
-        <p>Built an Android taxi app for drivers and customers from scratch.</p>
+        <div class="location" data-i18n="exp.loc.6">Phnom Penh, Cambodia</div>
+        <p data-i18n="exp.desc.6">Built an Android taxi app for drivers and customers from scratch.</p>
       </div>
 
     </div>
@@ -133,11 +169,11 @@
 
 <section id="skills">
   <div class="container">
-    <h2>Skills & Tools</h2>
-    <p class="lead">Languages, frameworks, and tools I work with.</p>
+    <h2 data-i18n="skills.title">Skills & Tools</h2>
+    <p class="lead" data-i18n="skills.lead">Languages, frameworks, and tools I work with.</p>
     <div class="skills-grid">
       <div class="skill-group">
-        <h4>Languages</h4>
+        <h4 data-i18n="skills.group.lang">Languages</h4>
         <div class="chips">
           <span class="chip">Kotlin</span>
           <span class="chip">Java</span>
@@ -145,7 +181,7 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>Frameworks & SDKs</h4>
+        <h4 data-i18n="skills.group.frameworks">Frameworks & SDKs</h4>
         <div class="chips">
           <span class="chip">Flutter SDK</span>
           <span class="chip">Jetpack Compose</span>
@@ -154,7 +190,7 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>Platforms & Services</h4>
+        <h4 data-i18n="skills.group.platforms">Platforms & Services</h4>
         <div class="chips">
           <span class="chip">Firebase</span>
           <span class="chip">Google APIs</span>
@@ -162,7 +198,7 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>Dev Tools</h4>
+        <h4 data-i18n="skills.group.devtools">Dev Tools</h4>
         <div class="chips">
           <span class="chip">VS Code</span>
           <span class="chip">Cursor</span>
@@ -175,7 +211,7 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>AI & LLMs</h4>
+        <h4 data-i18n="skills.group.ai">AI & LLMs</h4>
         <div class="chips">
           <span class="chip">Claude</span>
           <span class="chip">Claude Code</span>
@@ -190,23 +226,23 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>Top Skills</h4>
+        <h4 data-i18n="skills.group.top">Top Skills</h4>
         <div class="chips">
-          <span class="chip">Budget Management</span>
-          <span class="chip">Program Management</span>
-          <span class="chip">Version Control Tools</span>
-          <span class="chip">Mobile App Architecture</span>
-          <span class="chip">Digital Banking</span>
-          <span class="chip">Team Leadership</span>
-          <span class="chip">Code Review</span>
-          <span class="chip">Agile / Scrum</span>
-          <span class="chip">REST APIs</span>
-          <span class="chip">CI/CD</span>
-          <span class="chip">Cross-functional Collaboration</span>
-          <span class="chip">Performance Optimization</span>
-          <span class="chip">App Security</span>
-          <span class="chip">Problem Solving</span>
-          <span class="chip">Mentoring</span>
+          <span class="chip" data-i18n="skills.top.budget">Budget Management</span>
+          <span class="chip" data-i18n="skills.top.program">Program Management</span>
+          <span class="chip" data-i18n="skills.top.vcs">Version Control Tools</span>
+          <span class="chip" data-i18n="skills.top.arch">Mobile App Architecture</span>
+          <span class="chip" data-i18n="skills.top.banking">Digital Banking</span>
+          <span class="chip" data-i18n="skills.top.lead">Team Leadership</span>
+          <span class="chip" data-i18n="skills.top.review">Code Review</span>
+          <span class="chip" data-i18n="skills.top.agile">Agile / Scrum</span>
+          <span class="chip" data-i18n="skills.top.rest">REST APIs</span>
+          <span class="chip" data-i18n="skills.top.cicd">CI/CD</span>
+          <span class="chip" data-i18n="skills.top.collab">Cross-functional Collaboration</span>
+          <span class="chip" data-i18n="skills.top.perf">Performance Optimization</span>
+          <span class="chip" data-i18n="skills.top.security">App Security</span>
+          <span class="chip" data-i18n="skills.top.problem">Problem Solving</span>
+          <span class="chip" data-i18n="skills.top.mentor">Mentoring</span>
         </div>
       </div>
     </div>
@@ -215,38 +251,38 @@
 
 <section id="principles">
   <div class="container">
-    <h2>Leadership & Discipline</h2>
-    <p class="lead">The principles I bring to every team and every project.</p>
+    <h2 data-i18n="prin.title">Leadership & Discipline</h2>
+    <p class="lead" data-i18n="prin.lead">The principles I bring to every team and every project.</p>
     <div class="principles-list">
       <div class="principle">
-        <span class="p-icon">🧭</span>
-        <h3>Lead by Example</h3>
-        <p>Set the bar with the work itself — clean code, clear reviews, and follow-through people can rely on.</p>
+        <span class="p-icon"><i data-lucide="compass"></i></span>
+        <h3 data-i18n="prin.0.h">Lead by Example</h3>
+        <p data-i18n="prin.0.p">Set the bar with the work itself — clean code, clear reviews, and follow-through people can rely on.</p>
       </div>
       <div class="principle">
-        <span class="p-icon">🤝</span>
-        <h3>Empower the Team</h3>
-        <p>Mentor junior engineers, share knowledge openly, and create space for others to grow and own their work.</p>
+        <span class="p-icon"><i data-lucide="handshake"></i></span>
+        <h3 data-i18n="prin.1.h">Empower the Team</h3>
+        <p data-i18n="prin.1.p">Mentor junior engineers, share knowledge openly, and create space for others to grow and own their work.</p>
       </div>
       <div class="principle">
-        <span class="p-icon">🎯</span>
-        <h3>Focus & Ownership</h3>
-        <p>Commit to outcomes, not excuses. Take responsibility end-to-end from plan to production.</p>
+        <span class="p-icon"><i data-lucide="target"></i></span>
+        <h3 data-i18n="prin.2.h">Focus & Ownership</h3>
+        <p data-i18n="prin.2.p">Commit to outcomes, not excuses. Take responsibility end-to-end from plan to production.</p>
       </div>
       <div class="principle">
-        <span class="p-icon">⏱️</span>
-        <h3>Consistency</h3>
-        <p>Small, steady progress every day beats sporadic bursts. Discipline turns goals into shipped products.</p>
+        <span class="p-icon"><i data-lucide="timer"></i></span>
+        <h3 data-i18n="prin.3.h">Consistency</h3>
+        <p data-i18n="prin.3.p">Small, steady progress every day beats sporadic bursts. Discipline turns goals into shipped products.</p>
       </div>
       <div class="principle">
-        <span class="p-icon">📈</span>
-        <h3>Continuous Learning</h3>
-        <p>The mobile and AI landscape shifts fast — I keep learning, experimenting, and applying what works.</p>
+        <span class="p-icon"><i data-lucide="trending-up"></i></span>
+        <h3 data-i18n="prin.4.h">Continuous Learning</h3>
+        <p data-i18n="prin.4.p">The mobile and AI landscape shifts fast — I keep learning, experimenting, and applying what works.</p>
       </div>
       <div class="principle">
-        <span class="p-icon">🛡️</span>
-        <h3>Integrity</h3>
-        <p>Honest communication, especially when things go wrong. Trust is built in the hard conversations.</p>
+        <span class="p-icon"><i data-lucide="shield-check"></i></span>
+        <h3 data-i18n="prin.5.h">Integrity</h3>
+        <p data-i18n="prin.5.p">Honest communication, especially when things go wrong. Trust is built in the hard conversations.</p>
       </div>
     </div>
   </div>
@@ -254,38 +290,38 @@
 
 <section id="goals">
   <div class="container">
-    <h2>Goals</h2>
-    <p class="lead">Where I'm focused over the next few years.</p>
+    <h2 data-i18n="goals.title">Goals</h2>
+    <p class="lead" data-i18n="goals.lead">Where I'm focused over the next few years.</p>
     <div class="roadmap">
       <div class="goal">
         <span class="num">01</span>
-        <h3>Ship Banking Products at Scale</h3>
-        <p>Lead the delivery of mobile banking features that serve hundreds of thousands of Cambodian users reliably and securely.</p>
+        <h3 data-i18n="goals.0.h">Ship Banking Products at Scale</h3>
+        <p data-i18n="goals.0.p">Lead the delivery of mobile banking features that serve hundreds of thousands of Cambodian users reliably and securely.</p>
       </div>
       <div class="goal">
         <span class="num">02</span>
-        <h3>Deepen AI Integration</h3>
-        <p>Bring LLM-powered assistance into real banking workflows — from support to fraud signals — in ways that are practical and safe.</p>
+        <h3 data-i18n="goals.1.h">Deepen AI Integration</h3>
+        <p data-i18n="goals.1.p">Bring LLM-powered assistance into real banking workflows — from support to fraud signals — in ways that are practical and safe.</p>
       </div>
       <div class="goal">
         <span class="num">03</span>
-        <h3>Build a Strong Mobile Team</h3>
-        <p>Grow a team of mobile engineers in Phnom Penh who ship with confidence, review each other well, and raise the local bar.</p>
+        <h3 data-i18n="goals.2.h">Build a Strong Mobile Team</h3>
+        <p data-i18n="goals.2.p">Grow a team of mobile engineers in Phnom Penh who ship with confidence, review each other well, and raise the local bar.</p>
       </div>
       <div class="goal">
         <span class="num">04</span>
-        <h3>Master Architecture</h3>
-        <p>Keep sharpening clean architecture, modularization, and platform patterns across Android and Flutter codebases.</p>
+        <h3 data-i18n="goals.3.h">Master Architecture</h3>
+        <p data-i18n="goals.3.p">Keep sharpening clean architecture, modularization, and platform patterns across Android and Flutter codebases.</p>
       </div>
       <div class="goal">
         <span class="num">05</span>
-        <h3>Raise the Security Bar</h3>
-        <p>Push for stronger app security, auth, and data handling — the non-negotiable foundation of any banking app.</p>
+        <h3 data-i18n="goals.4.h">Raise the Security Bar</h3>
+        <p data-i18n="goals.4.p">Push for stronger app security, auth, and data handling — the non-negotiable foundation of any banking app.</p>
       </div>
       <div class="goal">
         <span class="num">06</span>
-        <h3>Contribute Beyond the Office</h3>
-        <p>Share what I've learned through writing, talks, and mentoring — helping more Cambodian devs grow into senior roles.</p>
+        <h3 data-i18n="goals.5.h">Contribute Beyond the Office</h3>
+        <p data-i18n="goals.5.p">Share what I've learned through writing, talks, and mentoring — helping more Cambodian devs grow into senior roles.</p>
       </div>
     </div>
   </div>
@@ -293,64 +329,64 @@
 
 <section id="achievements">
   <div class="container">
-    <h2>Achievements</h2>
-    <p class="lead">Milestones across 8+ years of building mobile products.</p>
+    <h2 data-i18n="achv.title">Achievements</h2>
+    <p class="lead" data-i18n="achv.lead">Milestones across 8+ years of building mobile products.</p>
     <div class="achievements">
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🏦</span>
-          <h3>Digital Banking Delivery</h3>
+          <span class="a-icon"><i data-lucide="landmark"></i></span>
+          <h3 data-i18n="achv.0.h">Digital Banking Delivery</h3>
         </div>
-        <p>Leading digital banking initiatives at Heng Feng (Cambodia) Bank — driving mobile product delivery end-to-end.</p>
+        <p data-i18n="achv.0.p">Leading digital banking initiatives at Heng Feng (Cambodia) Bank — driving mobile product delivery end-to-end.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">📱</span>
-          <h3>Mobile Banking at Canadia</h3>
+          <span class="a-icon"><i data-lucide="smartphone"></i></span>
+          <h3 data-i18n="achv.1.h">Mobile Banking at Canadia</h3>
         </div>
-        <p>Built and maintained core features of Canadia Bank's mobile app, one of Cambodia's largest banking platforms.</p>
+        <p data-i18n="achv.1.p">Built and maintained core features of Canadia Bank's mobile app, one of Cambodia's largest banking platforms.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🚖</span>
-          <h3>Taxi App From Scratch</h3>
+          <span class="a-icon"><i data-lucide="car-taxi-front"></i></span>
+          <h3 data-i18n="achv.2.h">Taxi App From Scratch</h3>
         </div>
-        <p>Designed and launched an Android ride-hailing app at GAEASYS, shipping both driver and customer sides from zero.</p>
+        <p data-i18n="achv.2.p">Designed and launched an Android ride-hailing app at GAEASYS, shipping both driver and customer sides from zero.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🌾</span>
-          <h3>AGRIBEE BeeApp</h3>
+          <span class="a-icon"><i data-lucide="wheat"></i></span>
+          <h3 data-i18n="achv.3.h">AGRIBEE BeeApp</h3>
         </div>
-        <p>Implemented and maintained Flutter features for BeeApp, supporting Cambodia's agricultural ecosystem.</p>
+        <p data-i18n="achv.3.p">Implemented and maintained Flutter features for BeeApp, supporting Cambodia's agricultural ecosystem.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">👥</span>
-          <h3>Team Leadership</h3>
+          <span class="a-icon"><i data-lucide="users"></i></span>
+          <h3 data-i18n="achv.4.h">Team Leadership</h3>
         </div>
-        <p>Mentored junior engineers, ran code reviews, and helped shape mobile standards across multiple teams.</p>
+        <p data-i18n="achv.4.p">Mentored junior engineers, ran code reviews, and helped shape mobile standards across multiple teams.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🎓</span>
-          <h3>Bachelor's in IT</h3>
+          <span class="a-icon"><i data-lucide="graduation-cap"></i></span>
+          <h3 data-i18n="achv.5.h">Bachelor's in IT</h3>
         </div>
-        <p>Graduated from the University of Cambodia (2012–2017) with a degree in Information Technology.</p>
+        <p data-i18n="achv.5.p">Graduated from the University of Cambodia (2012–2017) with a degree in Information Technology.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🛠️</span>
-          <h3>Multi-Stack Mastery</h3>
+          <span class="a-icon"><i data-lucide="wrench"></i></span>
+          <h3 data-i18n="achv.6.h">Multi-Stack Mastery</h3>
         </div>
-        <p>Shipped production apps in Kotlin, Java, and Dart across Android native and Flutter — across fintech, agri, and mobility.</p>
+        <p data-i18n="achv.6.p">Shipped production apps in Kotlin, Java, and Dart across Android native and Flutter — across fintech, agri, and mobility.</p>
       </div>
       <div class="achv">
         <div class="a-head">
-          <span class="a-icon">🤖</span>
-          <h3>AI-Augmented Workflow</h3>
+          <span class="a-icon"><i data-lucide="bot"></i></span>
+          <h3 data-i18n="achv.7.h">AI-Augmented Workflow</h3>
         </div>
-        <p>Early adopter of Claude Code, Cursor, and local LLMs — integrating AI into daily engineering to ship faster and cleaner.</p>
+        <p data-i18n="achv.7.p">Early adopter of Claude Code, Cursor, and local LLMs — integrating AI into daily engineering to ship faster and cleaner.</p>
       </div>
     </div>
   </div>
@@ -358,26 +394,26 @@
 
 <section id="education">
   <div class="container">
-    <h2>Education</h2>
-    <p class="lead">Formal education and professional training.</p>
+    <h2 data-i18n="edu.title">Education</h2>
+    <p class="lead" data-i18n="edu.lead">Formal education and professional training.</p>
     <div class="edu-wrap">
       <div class="edu-card">
         <div class="edu-top">
-          <span class="edu-mark">🎓</span>
+          <span class="edu-mark"><i data-lucide="graduation-cap"></i></span>
           <span class="edu-period">2012 — 2017</span>
         </div>
-        <h3>University of Cambodia</h3>
+        <h3 data-i18n="edu.0.h">University of Cambodia</h3>
         <div class="edu-divider"></div>
-        <p class="degree">Bachelor's degree, Information Technology</p>
+        <p class="degree" data-i18n="edu.0.degree">Bachelor's degree, Information Technology</p>
       </div>
       <div class="edu-card">
         <div class="edu-top">
-          <span class="edu-mark">📖</span>
+          <span class="edu-mark"><i data-lucide="book-open"></i></span>
           <span class="edu-period">2016 — 2017</span>
         </div>
-        <h3>HRD Center</h3>
+        <h3 data-i18n="edu.1.h">HRD Center</h3>
         <div class="edu-divider"></div>
-        <p class="degree">Basic and Advanced Courses — Java, Web, Spring, Android</p>
+        <p class="degree" data-i18n="edu.1.degree">Basic and Advanced Courses — Java, Web, Spring, Android</p>
       </div>
     </div>
   </div>
@@ -385,58 +421,58 @@
 
 <section id="hobbies">
   <div class="container">
-    <h2>Hobbies</h2>
-    <p class="lead">A few things I enjoy outside of work.</p>
+    <h2 data-i18n="hob.title">Hobbies</h2>
+    <p class="lead" data-i18n="hob.lead">A few things I enjoy outside of work.</p>
     <div class="hobby-grid">
       <div class="hobby">
-        <span class="icon">📱</span>
-        <h3>Side Projects</h3>
-        <p>Tinkering with new mobile ideas and learning frameworks by building small apps.</p>
+        <span class="icon"><i data-lucide="smartphone"></i></span>
+        <h3 data-i18n="hob.0.h">Side Projects</h3>
+        <p data-i18n="hob.0.p">Tinkering with new mobile ideas and learning frameworks by building small apps.</p>
       </div>
       <div class="hobby">
-        <span class="icon">📚</span>
-        <h3>Reading Tech</h3>
-        <p>Keeping up with mobile development trends, design patterns, and engineering blogs.</p>
+        <span class="icon"><i data-lucide="book-marked"></i></span>
+        <h3 data-i18n="hob.1.h">Reading Tech</h3>
+        <p data-i18n="hob.1.p">Keeping up with mobile development trends, design patterns, and engineering blogs.</p>
       </div>
       <div class="hobby">
-        <span class="icon">☕</span>
-        <h3>Coffee</h3>
-        <p>Exploring cafés around Phnom Penh — a good espresso fuels the best code.</p>
+        <span class="icon"><i data-lucide="coffee"></i></span>
+        <h3 data-i18n="hob.2.h">Coffee</h3>
+        <p data-i18n="hob.2.p">Exploring cafés around Phnom Penh — a good espresso fuels the best code.</p>
       </div>
       <div class="hobby">
-        <span class="icon">🎮</span>
-        <h3>Gaming</h3>
-        <p>Unwinding with mobile and strategy games — also great UX inspiration.</p>
+        <span class="icon"><i data-lucide="gamepad-2"></i></span>
+        <h3 data-i18n="hob.3.h">Gaming</h3>
+        <p data-i18n="hob.3.p">Unwinding with mobile and strategy games — also great UX inspiration.</p>
       </div>
       <div class="hobby">
-        <span class="icon">✈️</span>
-        <h3>Travel</h3>
-        <p>Discovering new places, cultures, and food whenever the chance comes up.</p>
+        <span class="icon"><i data-lucide="plane"></i></span>
+        <h3 data-i18n="hob.4.h">Travel</h3>
+        <p data-i18n="hob.4.p">Discovering new places, cultures, and food whenever the chance comes up.</p>
       </div>
       <div class="hobby">
-        <span class="icon">🎵</span>
-        <h3>Music</h3>
-        <p>Good playlists make long coding sessions fly by.</p>
+        <span class="icon"><i data-lucide="music"></i></span>
+        <h3 data-i18n="hob.5.h">Music</h3>
+        <p data-i18n="hob.5.p">Good playlists make long coding sessions fly by.</p>
       </div>
       <div class="hobby">
-        <span class="icon">🏋️</span>
-        <h3>Gym</h3>
-        <p>Lifting and training — keeping the body sharp balances a day at the screen.</p>
+        <span class="icon"><i data-lucide="dumbbell"></i></span>
+        <h3 data-i18n="hob.6.h">Gym</h3>
+        <p data-i18n="hob.6.p">Lifting and training — keeping the body sharp balances a day at the screen.</p>
       </div>
       <div class="hobby">
-        <span class="icon">🥾</span>
-        <h3>Hiking</h3>
-        <p>Trails, fresh air, and long walks — the best way to reset after intense sprints.</p>
+        <span class="icon"><i data-lucide="footprints"></i></span>
+        <h3 data-i18n="hob.7.h">Hiking</h3>
+        <p data-i18n="hob.7.p">Trails, fresh air, and long walks — the best way to reset after intense sprints.</p>
       </div>
       <div class="hobby">
-        <span class="icon">🏕️</span>
-        <h3>Camping</h3>
-        <p>Nights under the stars and good conversations around a campfire.</p>
+        <span class="icon"><i data-lucide="tent"></i></span>
+        <h3 data-i18n="hob.8.h">Camping</h3>
+        <p data-i18n="hob.8.p">Nights under the stars and good conversations around a campfire.</p>
       </div>
       <div class="hobby">
-        <span class="icon">📷</span>
-        <h3>Photography</h3>
-        <p>Capturing street scenes and landscapes — training the eye for detail and composition.</p>
+        <span class="icon"><i data-lucide="camera"></i></span>
+        <h3 data-i18n="hob.9.h">Photography</h3>
+        <p data-i18n="hob.9.p">Capturing street scenes and landscapes — training the eye for detail and composition.</p>
       </div>
     </div>
   </div>
@@ -444,25 +480,41 @@
 
 <section id="contact">
   <div class="container">
-    <h2>Let's connect</h2>
-    <p class="lead">Open to collaborations, projects, and good conversations.</p>
+    <h2 data-i18n="contact.title">Let's connect</h2>
+    <p class="lead" data-i18n="contact.lead">Open to collaborations, projects, and good conversations.</p>
     <div class="contact-links">
       <a href="mailto:sophanith.kong221@gmail.com">sophanith.kong221@gmail.com</a>
       <a href="tel:+855899267375">089 26 7375</a>
       <a href="tel:+855122391098">012 23 9108</a>
-      <a href="https://t.me/sophanit9108" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://www.linkedin.com/in/sophanit9108" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://t.me/sophanit9108" target="_blank" rel="noopener" data-i18n="contact.telegram">Telegram</a>
+      <a href="https://www.linkedin.com/in/sophanit9108" target="_blank" rel="noopener" data-i18n="contact.linkedin">LinkedIn</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    © <span id="year"></span> Kong Sophanit · Phnom Penh, Cambodia
+    © <span id="year"></span> Kong Sophanit · <span data-i18n="footer.location">Phnom Penh, Cambodia</span>
   </div>
 </footer>
 
 <script>
+  // Lucide is loaded with `defer`, so wait for DOMContentLoaded before rendering icons
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) lucide.createIcons();
+  });
+
+  // Theme toggle (initial theme is set by inline <head> script before paint)
+  window.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('portfolio.theme', next); } catch (e) {}
+    });
+  });
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Mobile nav toggle
